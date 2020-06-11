@@ -11,6 +11,8 @@
 * [Using cProfile](#using-cprofile)
 * [Using pstats](#using-pstats)
 * [Using SnakeViz](#using-snakeviz)
+* [Using kernprof and line_profiler](#using-kernprof-and-line_profiler)
+* [Using memory_profiler](#using-memory_profiler)
 * [License](#license)
 
 ## Description
@@ -211,6 +213,58 @@ http://127.0.0.1:8080/snakeviz/<...>optimizing-python%2Fsrc%2Fprof.out
 ```
 ![SnakeViz 1](snakeviz1.png)
 ![SnakeViz 2](snakeviz2.png)
+
+## Using kernprof and line_profiler
+Be aware of the usage of the `@profile` that will throw error when just running the file.
+It should be used just when profiling!
+This is the command for getting the profile of a function in a more detailed way:
+```
+(optimizing-python) ➜ kernprof -l src/using_line_and_memory_profiler.py 
+999996
+Wrote profile results to using_line_and_memory_profiler.py.lprof
+(optimizing-python) ➜ python -m line_profiler using_line_and_memory_profiler.py.lprof 
+Timer unit: 1e-06 s
+
+Total time: 0.328005 s
+File: src/using_line_and_memory_profiler.py
+Function: sum_of_diffs at line 4
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     4                                           @profile
+     5                                           def sum_of_diffs(vals):
+     6                                               """Compute sum of diffs"""
+     7         1       4270.0   4270.0      1.3      vals2 = vals[1:]
+     8                                           
+     9         1          3.0      3.0      0.0      total = 0
+    10    333333     152049.0      0.5     46.4      for v1, v2 in zip(vals, vals2):
+    11    333332     171683.0      0.5     52.3          total += v2 - v1
+    12                                           
+    13         1          0.0      0.0      0.0      return total
+```
+
+## Using memory_profiler
+Be aware of the usage of the `@profile` that will throw error when just running the file.
+It should be used just when profiling!
+This is the command for getting the memory profile:
+```
+(optimizing-python) ➜ python -m memory_profiler src/using_line_and_memory_profiler.py
+999996
+Filename: src/using_memory_profiler.py
+
+Line #    Mem usage    Increment   Line Contents
+================================================
+     4   50.293 MiB   50.293 MiB   @profile
+     5                             def sum_of_diffs(vals):
+     6                                 """Compute sum of diffs"""
+     7   52.840 MiB    2.547 MiB       vals2 = vals[1:]
+     8                             
+     9   52.840 MiB    0.000 MiB       total = 0
+    10   52.844 MiB    0.000 MiB       for v1, v2 in zip(vals, vals2):
+    11   52.844 MiB    0.004 MiB           total += v2 - v1
+    12                             
+    13   52.844 MiB    0.000 MiB       return total
+```
 
 ## License
 This project is licensed under the terms of the MIT License.
