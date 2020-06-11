@@ -35,7 +35,7 @@ Understanding how to optimise Python by following the course https://www.linkedi
 - Setup the run configuration in the IDE if needed: https://www.jetbrains.com/help/pycharm/creating-and-editing-run-debug-configurations.html?keymap=secondary_macos.
 
 ## Security
-Command for running security checks on installed dependencies for security vulnerabilities:
+Command for running security checks on installed dependencies:
 ```
 make security
 ```
