@@ -6,7 +6,7 @@ from src.login import login
 
 # When using cProfile we get the number of calls, the total time, the time per
 # call, etc., etc. We run it by doing:
-# python -m cProfile src/using_cprofile.py
+# python -m cProfile src/prof.py
 # Using cProfile will slow down the program. If we need a more lightweight
 # statistical profiler then we can take a look at the vn prof package.
 def gen_cases(n):

@@ -72,7 +72,7 @@ Python 3.8.3 (v3.8.3:6f8c8320e9, May 13 2020, 16:29:34)
 Type 'copyright', 'credits' or 'license' for more information
 IPython 7.15.0 -- An enhanced Interactive Python. Type '?' for help.
 
-In [1]: %run -n src/using_cprofile.py                                                                                                                                                                
+In [1]: %run -n src/prof.py                                                                                                                                                                
 
 In [2]: cases = list(gen_cases(1000)) 
 
@@ -101,7 +101,7 @@ In [4]: %prun -s cumulative bench_login(cases)
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
         1    0.000    0.000    0.031    0.031 {built-in method builtins.exec}
         1    0.000    0.000    0.031    0.031 <string>:1(<module>)
-        1    0.001    0.001    0.031    0.031 using_cprofile.py:22(bench_login)
+        1    0.001    0.001    0.031    0.031 prof.py:22(bench_login)
      1000    0.001    0.000    0.030    0.000 login.py:30(login)
      1000    0.002    0.000    0.022    0.000 login.py:12(user_passwd)
      1000    0.016    0.000    0.016    0.000 {method 'execute' of 'sqlite3.Cursor' objects}
@@ -117,7 +117,7 @@ Python 3.8.3 (v3.8.3:6f8c8320e9, May 13 2020, 16:29:34)
 Type 'copyright', 'credits' or 'license' for more information
 IPython 7.15.0 -- An enhanced Interactive Python. Type '?' for help.
 
-In [1]: %run -n src/using_cprofile.py                                                                                                                                                                
+In [1]: %run -n src/prof.py                                                                                                                                                                
 
 In [2]: cases = list(gen_cases(1000))                                                                                                                                                                
 
@@ -147,10 +147,10 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ## Using cProfile
 - Using the command line:
 ```
-(optimizing-python) ➜ python -m cProfile src/using_cprofile.py
+(optimizing-python) ➜ python -m cProfile src/prof.py
 ```
 - Using the IDE: 
-Run the profiler on `src/using_cprofile.py` as specified in https://www.jetbrains.com/help/pycharm/profiler.html
+Run the profiler on `src/prof.py` as specified in https://www.jetbrains.com/help/pycharm/profiler.html
 
 ## Using pstats
 - Using the command line:

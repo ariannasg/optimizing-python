@@ -1,7 +1,7 @@
 #!usr/bin/env python3
 import cProfile
 
-from src.using_cprofile import gen_cases, bench_login
+from src.prof import gen_cases, bench_login
 
 
 def bench_targeted_login_with_file(cases):
