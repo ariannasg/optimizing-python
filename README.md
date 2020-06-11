@@ -60,6 +60,14 @@ In [3]: %timeit use_catch('a')
 167 ns ± 5.37 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 ```
 
+## Using cProfile
+- Using the command line:
+```
+(optimizing-python) ➜ python -m cProfile src/using_cprofile.py
+```
+- Using the IDE: 
+Run the profiler on `src/using_cprofile.py` as specified in https://www.jetbrains.com/help/pycharm/profiler.html
+
 ## License
 This project is licensed under the terms of the MIT License.
 Please see [LICENSE](LICENSE.md) for details.
