@@ -31,9 +31,9 @@ Understanding how to optimise Python by following the course https://www.linkedi
 - Install python 3: https://www.python.org/downloads/.
 - Create and activate a virtual environment, then install project dependencies:
     ```
-    python3 -m venv ~/.python-envs/<name>
-    source  ~/.python-envs/<name>/bin/activate
-    (<name>) ➜  make install
+    python3 -m venv ~/.python-envs/optimizing-python
+    source  ~/.python-envs/optimizing-python/bin/activate
+    (optimizing-python) ➜  make install
     ```
 - Configure the IDE Interpreter to use the virtual environment as project interpreter.
 - Setup the run configuration in the IDE if needed: https://www.jetbrains.com/help/pycharm/creating-and-editing-run-debug-configurations.html?keymap=secondary_macos.
@@ -49,7 +49,7 @@ This is an example of trying out a timeit calculation using the IPython Notebook
 To load the code we use the "run" magic method. 
 The "-n" tells run not to run the main part of the code, just to load the functions in the file.
 ```
-(<name>) ➜ ipython
+(optimizing-python) ➜ ipython
 Python 3.8.3 (v3.8.3:6f8c8320e9, May 13 2020, 16:29:34) 
 Type 'copyright', 'credits' or 'license' for more information
 IPython 7.15.0 -- An enhanced Interactive Python. Type '?' for help.
@@ -66,7 +66,7 @@ In [3]: %timeit use_catch('a')
 ## Using cProfile
 - Using the command line:
 ```
-(<name>) ➜ python -m cProfile src/using_cprofile.py
+(optimizing-python) ➜ python -m cProfile src/using_cprofile.py
 ```
 - Using the IDE: 
 Run the profiler on `src/using_cprofile.py` as specified in https://www.jetbrains.com/help/pycharm/profiler.html
@@ -74,7 +74,7 @@ Run the profiler on `src/using_cprofile.py` as specified in https://www.jetbrain
 ## Using pstats
 - Using the command line:
 ```
-(<name>) ➜ python -m pstats src/prof.out 
+(optimizing-python) ➜ python -m pstats src/prof.out 
 Welcome to the profile statistics browser.
 src/prof.out% stats 3
 Thu Jun 11 12:18:52 2020    src/prof.out
@@ -124,7 +124,7 @@ Thu Jun 11 12:10:40 2020    src/prof.out
 ## Using SnakeViz
 For a much better graphic version of the pstats we can use SnakeViz:
 ```
-(<name>) ➜ snakeviz src/prof.out 
+(optimizing-python) ➜ snakeviz src/prof.out 
 snakeviz web server started on 127.0.0.1:8080; enter Ctrl-C to exit
 http://127.0.0.1:8080/snakeviz/<...>optimizing-python%2Fsrc%2Fprof.out
 ```
