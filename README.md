@@ -13,6 +13,7 @@
 * [Using SnakeViz](#using-snakeviz)
 * [Using kernprof and line_profiler](#using-kernprof-and-line_profiler)
 * [Using memory_profiler](#using-memory_profiler)
+* [Using mprof and matplot](#using-mprof-and-matplot)
 * [License](#license)
 
 ## Description
@@ -216,7 +217,7 @@ http://127.0.0.1:8080/snakeviz/<...>optimizing-python%2Fsrc%2Fprof.out
 
 ## Using kernprof and line_profiler
 Be aware of the usage of the `@profile` that will throw error when just running the file.
-It should be used just when profiling!
+It should be used just when running `kernprof`!
 This is the command for getting the time profile of a function in a more detailed way:
 ```
 (optimizing-python) ➜ kernprof -l src/using_line_and_memory_profiler.py 
@@ -245,7 +246,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 
 ## Using memory_profiler
 Be aware of the usage of the `@profile` that will throw error when just running the file.
-It should be used just when profiling!
+It should be used just when running `memory_profiler`!
 This is the command for getting the memory profile of a given function:
 ```
 (optimizing-python) ➜ python -m memory_profiler src/using_line_and_memory_profiler.py
@@ -265,6 +266,21 @@ Line #    Mem usage    Increment   Line Contents
     12                             
     13   52.844 MiB    0.000 MiB       return total
 ```
+
+## Using mprof and matplot
+In this example we'll use mprof to generate and see a graph of how our memory 
+is likely to continue growing for a given function. 
+We should measure loops over time with mprof and then plot the `.dat` generated files
+to understand potential memory issues.
+
+```
+(optimizing-python) ➜ mprof run src/using_mprof.py 
+mprof: Sampling memory every 0.1s
+running as a Python program...
+0
+(optimizing-python) ➜ mprof plot mprofile_20200611150437.dat 
+```
+![mprof](mprof.png)
 
 ## License
 This project is licensed under the terms of the MIT License.
