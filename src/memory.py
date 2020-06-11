@@ -24,3 +24,6 @@
 # will write to the disk, and then load the section memory we require into
 # actual memory. This is also known as a page fault, and it's a very
 # costly operation.
+
+# "Cache friendly" algorithms are those that divide the data to small parts
+# that fits inside a CPU cache line.

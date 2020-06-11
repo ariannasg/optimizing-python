@@ -3,6 +3,9 @@ from collections import namedtuple
 from datetime import datetime
 from itertools import cycle, islice
 
+# Tracemalloc doesn't exist in python 2, for python 2 we need
+# to use memory_profiler
+
 Event = namedtuple('Event', ['type', 'time', 'user', 'url', 'site'])
 
 
