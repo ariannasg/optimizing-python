@@ -10,6 +10,7 @@
 * [Using IPython](#using-ipython)
 * [Using cProfile](#using-cprofile)
 * [Using pstats](#using-pstats)
+* [Using SnakeViz](#using-snakeviz)
 * [License](#license)
 
 ## Description
