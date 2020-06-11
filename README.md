@@ -63,6 +63,51 @@ In [3]: %timeit use_catch('a')
 167 ns ± 5.37 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 ```
 
+This is an example of how to profile using IPython. 
+By default prun sorts the results by time.
+To view what options we have we can do `%prun?`
+```
+(optimizing-python) ➜  optimizing-python git:(master) ✗ ipython
+Python 3.8.3 (v3.8.3:6f8c8320e9, May 13 2020, 16:29:34) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.15.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: %run -n src/using_cprofile.py                                                                                                                                                                
+
+In [2]: cases = list(gen_cases(1000)) 
+
+In [3]: %prun bench_login(cases)  
+
+         8936 function calls in 0.033 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1000    0.017    0.000    0.017    0.000 {method 'execute' of 'sqlite3.Cursor' objects}
+      983    0.005    0.000    0.005    0.000 {built-in method _crypt.crypt}
+     1000    0.004    0.000    0.004    0.000 {method 'fetchone' of 'sqlite3.Cursor' objects}
+     1000    0.002    0.000    0.024    0.000 login.py:12(user_passwd)
+     1000    0.002    0.000    0.033    0.000 login.py:30(login)
+     1000    0.001    0.000    0.001    0.000 {method 'cursor' of 'sqlite3.Connection' objects}
+:
+                                             
+                                                                                                                
+In [4]: %prun -s cumulative bench_login(cases)   
+
+         8936 function calls in 0.031 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.031    0.031 {built-in method builtins.exec}
+        1    0.000    0.000    0.031    0.031 <string>:1(<module>)
+        1    0.001    0.001    0.031    0.031 using_cprofile.py:22(bench_login)
+     1000    0.001    0.000    0.030    0.000 login.py:30(login)
+     1000    0.002    0.000    0.022    0.000 login.py:12(user_passwd)
+     1000    0.016    0.000    0.016    0.000 {method 'execute' of 'sqlite3.Cursor' objects}
+
+```
+
 ## Using cProfile
 - Using the command line:
 ```
