@@ -1,3 +1,4 @@
+[![CI Workflow](https://github.com/ariannasg/optimizing-python/workflows/CI%20Workflow/badge.svg)](https://github.com/ariannasg/optimizing-python/actions?query=workflow%3A%22CI+Workflow%22)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md)
 
 # Optimizing Python Code - Course
@@ -24,13 +25,12 @@ Understanding how to optimise Python by following the course https://www.linkedi
 
 ## Local setup
 - Install python 3: https://www.python.org/downloads/.
-- Install project dependencies using requirements.txt
-        - Create and activate a virtual environment, then install deps:
-            ```
-            python3 -m venv ~/.python-envs/<name>
-            source  ~/.python-envs/<name>/bin/activate
-            (<name>) ➜  make install
-            ```
+- Create and activate a virtual environment, then install project dependencies:
+    ```
+    python3 -m venv ~/.python-envs/<name>
+    source  ~/.python-envs/<name>/bin/activate
+    (<name>) ➜  make install
+    ```
 - Configure the IDE Interpreter to use the virtual environment as project interpreter.
 - Setup the run configuration in the IDE if needed: https://www.jetbrains.com/help/pycharm/creating-and-editing-run-debug-configurations.html?keymap=secondary_macos.
 
