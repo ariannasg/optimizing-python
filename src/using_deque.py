@@ -58,6 +58,9 @@ if __name__ == '__main__':
           timeit('test_queue(cls=DTaskQueue)',
                  'from __main__ import test_queue, DTaskQueue'))
 
-# CONSOLE OUTPUT (it varies but using a deque is always a bit faster):
+# using a deque is always a bit faster
+# 12.596856459/13.187268659 = 0.9552286212355992 -> we have around 5% speedup
+
+# CONSOLE OUTPUT (it varies)
 # using a list 13.187268659
 # using a deque 12.596856459

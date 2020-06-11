@@ -30,9 +30,15 @@ if __name__ == '__main__':
     print('catch', timeit('use_catch("x")', 'from __main__ import use_catch'))
     print('get', timeit('use_get("x")', 'from __main__ import use_get'))
 
-# CONSOLE OUTPUT (it varies but the try-catch is always faster when the key is
-# in the dict; and get is faster when the key is not in the dict) we should
-# decide what's more likely to happen in our code and go with that solution:
+
+# the try-catch is always faster when the key is in the dict -> 25% faster.
+# the get is faster when the key is not in the dict -> 50% faster.
+# we should decide what's more likely to happen in our code and go with
+# that solution.
+# 0.13891867400000002/0.18536753300000008 = 0.7494228992085683
+# 0.20828379099999994/0.4114921249999999 =  0.5061671374634448
+
+# CONSOLE OUTPUT (it varies)
 # catch 0.13891867400000002
 # get 0.18536753300000008
 # catch 0.4114921249999999

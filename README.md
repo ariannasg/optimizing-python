@@ -66,6 +66,8 @@ In [2]: %timeit use_get('a')
 In [3]: %timeit use_catch('a')                                                                                                                                                                       
 167 ns ± 5.37 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 ```
+Here with use_catch we gain around 20% speed-up (167/206 = 0.8106796116504854).
+
 
 This is an example of how to profile using IPython. 
 By default prun sorts the results by time.

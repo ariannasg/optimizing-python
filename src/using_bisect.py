@@ -49,6 +49,9 @@ if __name__ == '__main__':
     print('using loop', timeit('grade(74)', 'from __main__ import grade'))
     print('using bisect', timeit('grade2(74)', 'from __main__ import grade2'))
 
-# CONSOLE OUTPUT (it varies but using bisect is always faster):
+# using bisect is always faster.
+# 0.317963424/0.62431804 = 0.5092971908996895 -> we have around 50% speedup
+
+# CONSOLE OUTPUT (it varies):
 # using loop 0.62431804
 # using bisect 0.317963424

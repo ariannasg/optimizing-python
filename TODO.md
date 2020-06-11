@@ -16,4 +16,7 @@ In [6]: tree = KDTree(drivers)
 In [7]: %timeit find_closest_kd((lat, lng), tree)                                                                                                                                                    
 71.4 µs ± 6.12 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
 
+In [8]: 6.7/71.4                                                                                                                                                                                     
+Out[8]: 0.0938375350140056
 ```
+The first approach is around 99% faster

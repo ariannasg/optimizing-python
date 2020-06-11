@@ -97,6 +97,10 @@ if __name__ == '__main__':
           timeit('benchmark_pq(cases, cls=HPriorityQueue)',
                  'from __main__ import benchmark_pq, cases, HPriorityQueue'))
 
-# CONSOLE OUTPUT (it varies but using a heap is always a bit faster):
+# using a heap is always a bit faster
+# 6.514968917999999/7.282896069 = 0.894557447514771 -> we have around 10%
+# speedup
+
+# CONSOLE OUTPUT (it varies):
 # using list + sort 7.282896069
 # using a heap 6.514968917999999

@@ -70,7 +70,11 @@ if __name__ == '__main__':
           timeit('find_closest_kd((lat, lng), tree)',
                  'from __main__ import find_closest_kd, lat, lng, tree'))
 
-# CONSOLE OUTPUT (we should've got 8 times faster results with KD tree but
-# that's not the case...not sure way):
+# we should've got 8 times faster results with KD tree but
+# that's not the case...not sure way.
+# atm the KDTree is slower by almost 99%
+# 7.084976138/75.635740505 = 0.09367233123779145
+
+# CONSOLE OUTPUT (it varies):
 # using math calcs 7.084976138
 # using a KD tree 75.635740505
