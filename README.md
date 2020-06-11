@@ -108,6 +108,42 @@ In [4]: %prun -s cumulative bench_login(cases)
 
 ```
 
+This is an example of how to use the line_profiler using IPython.
+In this case, we'll use line_profiler to get a more detail profiling of the 
+login function in particular.
+```
+(optimizing-python) ➜ ipython
+Python 3.8.3 (v3.8.3:6f8c8320e9, May 13 2020, 16:29:34) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.15.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: %run -n src/using_cprofile.py                                                                                                                                                                
+
+In [2]: cases = list(gen_cases(1000))                                                                                                                                                                
+
+In [3]: %load_ext line_profiler                                                                                                                                                                      
+
+In [4]: %lprun -f login bench_login(cases)      
+Timer unit: 1e-06 s
+
+Total time: 0.03381 s
+File: /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/login.py
+Function: login at line 31
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    31                                           def login(user, passwd):
+    32                                               """Return True is user/passwd pair matches"""
+    33      1000        485.0      0.5      1.4      try:
+    34      1000      25466.0     25.5     75.3          db_passwd = user_passwd(user)
+    35        21         19.0      0.9      0.1      except KeyError:
+    36        21         22.0      1.0      0.1          return False
+    37                                           
+    38       979       7271.0      7.4     21.5      passwd = encrypt_passwd(passwd)
+    39       979        547.0      0.6      1.6      return passwd == db_passwd
+
+```
+
 ## Using cProfile
 - Using the command line:
 ```
