@@ -14,6 +14,7 @@
 * [Using kernprof and line_profiler](#using-kernprof-and-line_profiler)
 * [Using memory_profiler](#using-memory_profiler)
 * [Using mprof and matplot](#using-mprof-and-matplot)
+* [TODOs](#todos)
 * [License](#license)
 
 ## Description
@@ -281,6 +282,9 @@ running as a Python program...
 (optimizing-python) ➜ mprof plot mprofile_20200611150437.dat 
 ```
 ![mprof](mprof.png)
+
+## TODOs
+Please see list of [TODOs](TODO.md).
 
 ## License
 This project is licensed under the terms of the MIT License.
