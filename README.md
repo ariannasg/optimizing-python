@@ -48,7 +48,7 @@ This is an example of trying out a timeit calculation using the IPython Notebook
 To load the code we use the "run" magic method. 
 The "-n" tells run not to run the main part of the code, just to load the functions in the file.
 ```
-(optimizing-python) ➜ ipython
+(<name>) ➜ ipython
 Python 3.8.3 (v3.8.3:6f8c8320e9, May 13 2020, 16:29:34) 
 Type 'copyright', 'credits' or 'license' for more information
 IPython 7.15.0 -- An enhanced Interactive Python. Type '?' for help.
@@ -65,7 +65,7 @@ In [3]: %timeit use_catch('a')
 ## Using cProfile
 - Using the command line:
 ```
-(optimizing-python) ➜ python -m cProfile src/using_cprofile.py
+(<name>) ➜ python -m cProfile src/using_cprofile.py
 ```
 - Using the IDE: 
 Run the profiler on `src/using_cprofile.py` as specified in https://www.jetbrains.com/help/pycharm/profiler.html
@@ -73,7 +73,7 @@ Run the profiler on `src/using_cprofile.py` as specified in https://www.jetbrain
 ## Using pstats
 - Using the command line:
 ```
-(optimizing-python) ➜ python -m pstats src/prof.out 
+(<name>) ➜ python -m pstats src/prof.out 
 Welcome to the profile statistics browser.
 src/prof.out% stats 3
 Thu Jun 11 12:18:52 2020    src/prof.out
@@ -86,7 +86,7 @@ Thu Jun 11 12:18:52 2020    src/prof.out
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
         1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
         2    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
-        1    0.000    0.000    0.000    0.000 /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/using_cprofile_file.py:7(bench_targeted_login_with_file)
+        1    0.000    0.000    0.000    0.000 <...>/optimizing-python/src/using_cprofile_file.py:7(bench_targeted_login_with_file)
 
 
 src/prof.out% sort ncalls
@@ -100,8 +100,8 @@ Thu Jun 11 12:18:52 2020    src/prof.out
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
         2    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
-        2    0.000    0.000    0.000    0.000 /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/login.py:30(login)
-        2    0.000    0.000    0.000    0.000 /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/login.py:12(user_passwd)
+        2    0.000    0.000    0.000    0.000 <...>/optimizing-python/src/login.py:30(login)
+        2    0.000    0.000    0.000    0.000 <...>/optimizing-python/src/login.py:12(user_passwd)
 
 
 src/prof.out% sort tottime
@@ -116,9 +116,19 @@ Thu Jun 11 12:10:40 2020    src/prof.out
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
         2    0.007    0.004    0.007    0.004 {method 'execute' of 'sqlite3.Cursor' objects}
         1    0.000    0.000    0.007    0.007 {built-in method builtins.exec}
-        2    0.000    0.000    0.007    0.004 /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/login.py:12(user_passwd)
+        2    0.000    0.000    0.007    0.004 <...>/optimizing-python/src/login.py:12(user_passwd)
 
 ```
+
+## Using SnakeViz
+For a much better graphic version of the pstats we can use SnakeViz:
+```
+(<name>) ➜ snakeviz src/prof.out 
+snakeviz web server started on 127.0.0.1:8080; enter Ctrl-C to exit
+http://127.0.0.1:8080/snakeviz/<...>optimizing-python%2Fsrc%2Fprof.out
+```
+![SnakeViz 1](snakeviz1.png)
+![SnakeViz 2](snakeviz2.png)
 
 ## License
 This project is licensed under the terms of the MIT License.
