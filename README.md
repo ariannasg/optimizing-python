@@ -8,6 +8,8 @@
 * [Local setup](#local-setup)
 * [Security](#security)
 * [Using IPython](#using-ipython)
+* [Using cProfile](#using-cprofile)
+* [Using pstats](#using-pstats)
 * [License](#license)
 
 ## Description
@@ -67,6 +69,56 @@ In [3]: %timeit use_catch('a')
 ```
 - Using the IDE: 
 Run the profiler on `src/using_cprofile.py` as specified in https://www.jetbrains.com/help/pycharm/profiler.html
+
+## Using pstats
+- Using the command line:
+```
+(optimizing-python) ➜ python -m pstats src/prof.out 
+Welcome to the profile statistics browser.
+src/prof.out% stats 3
+Thu Jun 11 12:18:52 2020    src/prof.out
+
+         23 function calls in 0.000 seconds
+
+   Random listing order was used
+   List reduced from 14 to 3 due to restriction <3>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+        1    0.000    0.000    0.000    0.000 /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/using_cprofile_file.py:7(bench_targeted_login_with_file)
+
+
+src/prof.out% sort ncalls
+src/prof.out% stats 3
+Thu Jun 11 12:18:52 2020    src/prof.out
+
+         23 function calls in 0.000 seconds
+
+   Ordered by: call count
+   List reduced from 14 to 3 due to restriction <3>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+        2    0.000    0.000    0.000    0.000 /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/login.py:30(login)
+        2    0.000    0.000    0.000    0.000 /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/login.py:12(user_passwd)
+
+
+src/prof.out% sort tottime
+src/prof.out% stats 3
+Thu Jun 11 12:10:40 2020    src/prof.out
+
+         23 function calls in 0.007 seconds
+
+   Ordered by: internal time
+   List reduced from 14 to 3 due to restriction <3>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        2    0.007    0.004    0.007    0.004 {method 'execute' of 'sqlite3.Cursor' objects}
+        1    0.000    0.000    0.007    0.007 {built-in method builtins.exec}
+        2    0.000    0.000    0.007    0.004 /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/login.py:12(user_passwd)
+
+```
 
 ## License
 This project is licensed under the terms of the MIT License.
