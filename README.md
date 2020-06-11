@@ -217,7 +217,7 @@ http://127.0.0.1:8080/snakeviz/<...>optimizing-python%2Fsrc%2Fprof.out
 ## Using kernprof and line_profiler
 Be aware of the usage of the `@profile` that will throw error when just running the file.
 It should be used just when profiling!
-This is the command for getting the profile of a function in a more detailed way:
+This is the command for getting the time profile of a function in a more detailed way:
 ```
 (optimizing-python) ➜ kernprof -l src/using_line_and_memory_profiler.py 
 999996
@@ -246,7 +246,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ## Using memory_profiler
 Be aware of the usage of the `@profile` that will throw error when just running the file.
 It should be used just when profiling!
-This is the command for getting the memory profile:
+This is the command for getting the memory profile of a given function:
 ```
 (optimizing-python) ➜ python -m memory_profiler src/using_line_and_memory_profiler.py
 999996
