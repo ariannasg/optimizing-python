@@ -14,3 +14,6 @@
 # 1sec -> 1 thousand ms (milliseconds)
 # 1sec -> 1 million μS (microseconds)
 # 1sec -> 1 billion ns (nanoseconds)
+
+# 0.1 second is that magic number that makes human perceive something
+# happening in an instant. It's a great goal to reach.
