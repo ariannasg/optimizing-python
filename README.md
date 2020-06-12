@@ -14,6 +14,7 @@
 * [Using kernprof and line_profiler](#using-kernprof-and-line_profiler)
 * [Using memory_profiler](#using-memory_profiler)
 * [Using mprof and matplot](#using-mprof-and-matplot)
+* [Using pytest-benchmark](#using-pytest-benchmark)
 * [License](#license)
 
 ## Description
@@ -131,7 +132,7 @@ In [4]: %lprun -f login bench_login(cases)
 Timer unit: 1e-06 s
 
 Total time: 0.03381 s
-File: /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/login.py
+File: <...>/optimizing-python/src/login.py
 Function: login at line 31
 
 Line #      Hits         Time  Per Hit   % Time  Line Contents
@@ -177,7 +178,7 @@ Out[4]: 8697456
 In [5]: %load_ext memory_profiler                                                                                                                                                                    
 
 In [6]: %mprun -f alloc_points alloc_points(n)                                                                                                                                                       
-Filename: /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/slots.py
+Filename: <...>/optimizing-python/src/slots.py
 
 Line #    Mem usage    Increment   Line Contents
 ================================================
@@ -186,7 +187,7 @@ Line #    Mem usage    Increment   Line Contents
 
 
 In [7]: %mprun -f alloc_spoints alloc_spoints(n)                                                                                                                                                     
-Filename: /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/slots.py
+Filename: <...>/optimizing-python/src/slots.py
 
 Line #    Mem usage    Increment   Line Contents
 ================================================
@@ -328,6 +329,61 @@ running as a Python program...
 (optimizing-python) ➜ mprof plot mprofile_20200611150437.dat 
 ```
 ![mprof](mprof.png)
+
+## Using pytest-benchmark
+Using the command on a benchmark test that uses the benchmark fixture.
+This test is on `test_fib.py`. We first run the fib function without cache and then
+add the cache decorator to run pytest-benchmark again and see the comparison 
+of the performance.
+```
+(optimizing-python) ➜ pytest --benchmark-autosave
+======================================================================================== test session starts ========================================================================================
+platform darwin -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: <...>/optimizing-python
+plugins: benchmark-3.2.3
+collected 1 item                                                                                                                                                                                    
+
+src/test_fib.py .                                                                                                                                                                             [100%]
+Saved benchmark data in: <...>/optimizing-python/.benchmarks/Darwin-CPython-3.8-64bit/0001_aac4f82c7e0fc7bea055e84c1f37861581066d87_20200612_191208_uncommited-changes.json
+
+----------------------------------------------- benchmark: 1 tests -----------------------------------------------
+Name (time in ms)          Min       Max      Mean  StdDev    Median     IQR  Outliers     OPS  Rounds  Iterations
+------------------------------------------------------------------------------------------------------------------
+test_fib              359.9081  382.4121  373.4391  8.3471  375.3431  8.6162       2;0  2.6778       5           1
+------------------------------------------------------------------------------------------------------------------
+
+Legend:
+  Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
+  OPS: Operations Per Second, computed as 1 / Mean
+========================================================================================= 1 passed in 5.12s =========================================================================================
+
+
+
+(optimizing-python) ➜ pytest --benchmark-autosave --benchmark-compare
+Comparing against benchmarks from: Darwin-CPython-3.8-64bit/0001_aac4f82c7e0fc7bea055e84c1f37861581066d87_20200612_191208_uncommited-changes.json
+======================================================================================== test session starts ========================================================================================
+platform darwin -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: <...>/optimizing-python
+plugins: benchmark-3.2.3
+collected 1 item                                                                                                                                                                                    
+
+src/test_fib.py .                                                                                                                                                                             [100%]
+Saved benchmark data in: <...>/optimizing-python/.benchmarks/Darwin-CPython-3.8-64bit/0002_aac4f82c7e0fc7bea055e84c1f37861581066d87_20200612_191352_uncommited-changes.json
+
+----------------------------------------------------------------------------------------------------------------- benchmark: 2 tests -----------------------------------------------------------------------------------------------------------------
+Name (time in ns)                        Min                         Max                        Mean                    StdDev                      Median                       IQR            Outliers             OPS            Rounds  Iterations
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+test_fib (NOW)                      207.0000 (1.0)           29,545.0000 (1.0)              259.1928 (1.0)            261.7269 (1.0)              249.0000 (1.0)             50.0000 (1.0)        62;461  3,858,132.3430 (1.0)       28179           1
+test_fib (0001_aac4f82)     359,908,106.0000 (>1000.0)  382,412,084.0000 (>1000.0)  373,439,087.2000 (>1000.0)  8,347,108.2545 (>1000.0)  375,343,131.0000 (>1000.0)  8,616,164.2500 (>1000.0)       2;0          2.6778 (0.00)          5           1
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Legend:
+  Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
+  OPS: Operations Per Second, computed as 1 / Mean
+========================================================================================= 1 passed in 2.61s =========================================================================================
+```
 
 ## License
 This project is licensed under the terms of the MIT License.
