@@ -68,7 +68,7 @@ In [3]: %timeit use_catch('a')
 167 ns ± 5.37 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 ```
 
-This is an example of how to profile using IPython. 
+This is an example of how to profile using `prun` in IPython. 
 By default prun sorts the results by time.
 To view what options we have we can do `%prun?`
 ```
@@ -113,7 +113,7 @@ In [4]: %prun -s cumulative bench_login(cases)
 
 ```
 
-This is an example of how to use the line_profiler using IPython.
+This is an example of how to use the line_profiler in IPython.
 In this case, we'll use line_profiler to get a more detail profiling of the 
 login function in particular.
 ```
@@ -149,7 +149,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 
 ```
 
-This is an example of how to use the memory_profiler using IPython.
+This is an example of how to use the memory_profiler in IPython.
 In this case, we'll use memory_profiler to understand the memory that is being 
 allocated when using `__dict__` vs `__slot__` to store object attributes.
 Checking the size of objects that use `__dict__` and `__slot__` won't make a 
