@@ -21,6 +21,14 @@
 #  input/output; such as network or disk.
 # - CPU-BOUND: programs that spend most of their time doing calculations.
 #
+# Note: a way to know if a program is I/O-bound or CPU-bound is running the
+# magic method %time in IPython.
+# When the CPU time and the Wall time are about the same, it usually means the
+# code spends most of its time doing computation -> the program is CPU-bound.
+# When the difference between the CPU time and the Wall time is rather big,
+# then it usually means that most of the time is spent on I/O operations ->
+# the program is I/O-bound.
+#
 # Python's standard library offers 3 options for concurrency or parallelism:
 # - THREADS:
 # They are an independent units of execution that share the same memory space.
@@ -40,7 +48,7 @@
 # for CPU-bound programs. This comes with a price. Since processes don't
 # share memory, the communication between them is expensive. You need to
 # serialize your data, send it over a socket or pipe, and deserialize it on
-# the other side.
+# the other side. This is knows as inter-process communication (IPC).
 # Use processes if you have mostly CPU-bound applications and don't pass a lot
 # of information between processes.
 # - ASYNCIO (asynchronous input/output):

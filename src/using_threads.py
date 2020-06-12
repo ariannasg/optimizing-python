@@ -41,8 +41,9 @@ if __name__ == '__main__':
     ]
 
 # when using prun we can see that we spend most time on I/O doing socket
-# operations. by using threads, we reduced the time of the execution from
-#  3.6 s to 517 ms!
+# operations. we can also see this when calling time and realising the big
+# diff between the CPU time and the Wall time.
+# by using threads, we reduced the time of the execution from 3.6 s to 517 ms!
 
 # In [24]: %run src/using_threads.py
 #
