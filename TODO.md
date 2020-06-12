@@ -18,5 +18,8 @@ In [7]: %timeit find_closest_kd((lat, lng), tree)
 
 In [8]: 6.7/71.4                                                                                                                                                                                     
 Out[8]: 0.0938375350140056
+
+In [9]: 71.4/6.7                                                                                                                                                                                     
+Out[9]: 10.656716417910449
 ```
-The first approach is around 99% faster
+The first approach is around 10 times faster (99% speed-up)
