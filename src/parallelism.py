@@ -4,6 +4,8 @@
 # in parallel. The operating system gives each process a slice of time to run
 # on a specific core and then suspends that process.
 # This gives the illusion of parallelism and is known as concurrency.
+# Concurrency is about dealing with a lot of things at once.
+# Parallelism is about doing a lot of things at once.
 
 # Spreading our computation over several cores or even letting some computation
 # happen while other units of work are waiting can significantly speed up our
