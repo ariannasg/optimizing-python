@@ -10,6 +10,10 @@ from joblib import Memory
 # I'd like to avoid installing servers and configuring them.
 # Also, both of these services will lose all data if they are restarted.
 # Let's look at a simplest solution using joblib cache service.
+# We prefer joblib over lru_cache When we'd like to save cached results
+# between runs.
+# When using joblib, the results will be stored on disk and will persist
+# between runs.
 memory = Memory(expanduser('~/.cache/spell'), verbose=0)
 words_file = join(dirname(dirname(abspath(__file__))), 'src/words.txt')
 

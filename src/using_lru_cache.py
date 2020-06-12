@@ -23,6 +23,17 @@ from functools import lru_cache
 # a dict, etc. Sometimes in order to be able to use LRU cache
 # you need to modify your functions and make the arguments hashable.
 
+# Note:
+# The lru_cache decorator can be used to implement simply in-memory caching
+# in the application. For more advanced use cases, we should use 3rd party
+# modules that use on-disk caching. A great example to use lru_cache will be
+# on a memoized version of the the fibonacci function.
+# i.e: https://books.google.co.uk/books?id=sgyLDwAAQBAJ&pg=PA52&lpg=PA52
+# We prefer joblib over lru_cache When we'd like to save cached results
+# between runs.
+# When using joblib, the results will be stored on disk and will persist
+# between runs.
+
 # Note: Keep in secure place
 salt = string.ascii_letters
 
