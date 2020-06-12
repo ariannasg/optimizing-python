@@ -12,6 +12,7 @@
 # code. An example of waiting will be database returning results.
 
 # Amdahl's law: S(N) = 1/(1-P)+P(/N)
+# Amdahl's law will show the expected speedup from parallelization.
 # Gives the theoretical limit on speedup or latency you can get from going
 # parallel. i.e" if you have a program that runs in 10 minutes and there's a
 # one-minute section that can't be parallelized, then our program will run
@@ -64,6 +65,7 @@
 # frameworks work as well.
 # Use asyncio if you need to support many concurrent connections and have
 # async drivers to other services.
+# AsyncIO can be used on /IO-bound only if you have async drivers.
 
 # FROM JAVA - MULTI-THREADING:
 # threads allow multiple actions to be performed at the same time inside a
