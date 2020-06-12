@@ -19,7 +19,8 @@
 
 
 def bin_pack(items, bin_size, bins=None):
-    """Pack items in bins with size bin_size"""
+    """Pack items in bins with size bin_size.
+    We try all options first and then return the best one."""
     bins = [] if bins is None else bins
 
     if not items:
@@ -41,7 +42,9 @@ def bin_pack(items, bin_size, bins=None):
 
 
 def greedy_bin_pack(items, bin_size):
-    """Pack items in bins with size bin_size - greedy first-fit"""
+    """Pack items in bins with size bin_size - greedy first-fit.
+    We go over every item and if it fits in the bin, we edit for the current
+    bin. And if not, we create a new bin for it."""
     bins = []
 
     for item in items:
