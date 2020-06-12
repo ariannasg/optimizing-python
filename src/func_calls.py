@@ -39,6 +39,7 @@ def fix_nums_inline(nums):
 
 if __name__ == '__main__':
     random.seed(353)
+    # note: we should be using a much larger range here for profiling
     numbers = [random.randint(-20, 20) for _ in range(10)]
 
     assert abs_even(-4) == 4

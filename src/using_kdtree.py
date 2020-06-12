@@ -2,7 +2,6 @@
 
 import math
 from random import random
-from timeit import timeit
 
 from scipy.spatial import KDTree  # quick nearest-neighbor lookup
 
@@ -32,7 +31,7 @@ def find_closest_kd(loc, tree):
 def gen_drivers(lat, lng):
     """Generate list of drivers"""
     # 1 degree is ~ 69miles/110km
-    return [(lat + random(), lng + random()) for _ in range(10)]
+    return [(lat + random(), lng + random()) for _ in range(100_000)]
 
 
 def test_find_closest(kd=False):
@@ -60,21 +59,18 @@ if __name__ == '__main__':
     test_find_closest()
     test_find_closest(kd=True)
 
-    lat, lng = 34.3852712, -119.487444
-    drivers = gen_drivers(lat, lng)
-    tree = KDTree(drivers)
-    print('using math calcs',
-          timeit('find_closest((lat, lng), drivers)',
-                 'from __main__ import find_closest, lat, lng, drivers'))
-    print('using a KD tree',
-          timeit('find_closest_kd((lat, lng), tree)',
-                 'from __main__ import find_closest_kd, lat, lng, tree'))
+# we can see the improvements of using the KDTree (µs vs ms):
 
-# we should've got 8 times faster results with KD tree but
-# that's not the case...not sure way.
-# atm the KDTree is slower by almost 99%
-# 7.084976138/75.635740505 = 0.09367233123779145
-
-# CONSOLE OUTPUT (it varies):
-# using math calcs 7.084976138
-# using a KD tree 75.635740505
+# In [1]: %run -n src/using_kdtree.py
+#
+# In [2]: lat, lng = 34.3852712, -119.487444
+#
+# In [3]: drivers = gen_drivers(lat, lng)
+#
+# In [4]: %timeit find_closest((lat, lng), drivers)
+# 59.1 ms ± 1.02 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+#
+# In [5]: tree = KDTree(drivers)
+#
+# In [6]: %timeit find_closest_kd((lat, lng), tree)
+# 160 µs ± 7.88 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
