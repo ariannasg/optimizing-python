@@ -52,6 +52,7 @@ make security
 This is an example of trying out a timeit calculation using the IPython Notebook. 
 To load the code we use the "run" magic method. 
 The "-n" tells run not to run the main part of the code, just to load the functions in the file.
+Here with use_catch we gain around 20% speed-up (167/206 = 0.8106796116504854).
 ```
 (optimizing-python) ➜ ipython
 Python 3.8.3 (v3.8.3:6f8c8320e9, May 13 2020, 16:29:34) 
@@ -66,8 +67,6 @@ In [2]: %timeit use_get('a')
 In [3]: %timeit use_catch('a')                                                                                                                                                                       
 167 ns ± 5.37 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 ```
-Here with use_catch we gain around 20% speed-up (167/206 = 0.8106796116504854).
-
 
 This is an example of how to profile using IPython. 
 By default prun sorts the results by time.
@@ -148,6 +147,52 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
     38       979       7271.0      7.4     21.5      passwd = encrypt_passwd(passwd)
     39       979        547.0      0.6      1.6      return passwd == db_passwd
 
+```
+
+This is an example of how to use the memory_profiler using IPython.
+In this case, we'll use memory_profiler to understand the memory that is being 
+allocated when using `__dict__` vs `__slot__` to store object attributes.
+Checking the size of objects that use `__dict__` and `__slot__` won't make a 
+difference because what we get is the size of the lists of pointers to the
+objects, which is the same size in both cases. 
+We need to use memory_profiler to understand how much memory the objects consume.
+The important metric here is the mebibytes (MiB) which appears in "Increment".
+We can see that with `__dict__` we get 8.5 MiB and with `__slots__` 2.9 MiB; 
+this is almost 3 times less memory by adding just one line of code.
+```
+(optimizing-python) ➜ ipython
+Python 3.8.3 (v3.8.3:6f8c8320e9, May 13 2020, 16:29:34) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.15.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: %run src/slots.py                                                                                                                                                                            
+
+In [2]: import sys                                                                                                                                                                                   
+
+In [3]: sys.getsizeof(points)                                                                                                                                                                        
+Out[3]: 8697456
+
+In [4]: sys.getsizeof(spoints)                                                                                                                                                                       
+Out[4]: 8697456
+
+In [5]: %load_ext memory_profiler                                                                                                                                                                    
+
+In [6]: %mprun -f alloc_points alloc_points(n)                                                                                                                                                       
+Filename: /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/slots.py
+
+Line #    Mem usage    Increment   Line Contents
+================================================
+    32    314.4 MiB    314.4 MiB       def alloc_points(n):
+    33    508.2 MiB      8.5 MiB           return [Point(i, i) for i in range(n)]
+
+
+In [7]: %mprun -f alloc_spoints alloc_spoints(n)                                                                                                                                                     
+Filename: /Users/Ari/Documents/Learning/LinkedIn Learning/Optimizing Python Code/optimizing-python/src/slots.py
+
+Line #    Mem usage    Increment   Line Contents
+================================================
+    36    326.7 MiB    326.7 MiB       def alloc_spoints(n):
+    37    379.5 MiB      2.9 MiB           return [SPoint(i, i) for i in range(n)]
 ```
 
 ## Using cProfile
